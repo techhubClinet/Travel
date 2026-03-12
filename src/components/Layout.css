@@ -1,0 +1,4 @@
+/* Main content area: push footer down when content is short */
+.main-content {
+  flex: 1;
+}

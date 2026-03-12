@@ -1,0 +1,133 @@
+.page-hero-sub {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+}
+
+.services-block {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.services-block-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(13, 92, 99, 0.08);
+  color: var(--color-primary);
+  border-radius: var(--radius);
+}
+
+.services-block-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.services-block-content h2 {
+  margin-bottom: 0.5rem;
+}
+
+.services-intro {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.services-option-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.services-option-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--color-primary);
+  font-size: 1.0625rem;
+}
+
+.services-option-list li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.section-alt .services-option-list li {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+}
+
+.services-cta-wrap {
+  margin-top: 2rem;
+}
+
+.services-cta-wrap .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.services-carry {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin: 0;
+  font-size: 1.125rem;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-strip {
+  padding: 4rem 0;
+}
+
+.cta-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.cta-strip-text {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.cta-strip-text a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .services-block {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .services-block-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .services-option-list {
+    grid-template-columns: 1fr;
+  }
+}
