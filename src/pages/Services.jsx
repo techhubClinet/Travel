@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Clock, CalendarCheck, HeartPulse, ArrowRight } from 'lucide-react';
+import { Clock, CalendarCheck, HeartPulse, ArrowRight, Truck, Timer, Package, FileText, Building2, Mail } from 'lucide-react';
 import './Services.css';
 
-const sameDayOptions = [
-  'Direct Service',
-  '90 minute delivery',
-  '2 hour delivery',
-  '3 hour delivery',
-  '4 hour delivery',
-  'Same-day delivery before 5 PM',
+const priorityTimeOptions = [
+  '90-Minute Delivery',
+  '2-Hour Delivery',
+  '3-Hour Delivery',
+  '4-Hour Delivery',
 ];
 
 const scheduledItems = [
@@ -17,6 +15,17 @@ const scheduledItems = [
   'Routine supply transportation',
   'Bank deposits',
   'Medical facility supply routes',
+];
+
+const deliverTypes = [
+  { label: 'Legal and business documents', Icon: FileText },
+  { label: 'Medical supplies and equipment', Icon: HeartPulse },
+  { label: 'Parts and operational materials', Icon: Package },
+  { label: 'Office supplies', Icon: Package },
+  { label: 'Bank deposits', Icon: Building2 },
+  { label: 'Mortgage and financial documents', Icon: FileText },
+  { label: 'Mail and confidential packages', Icon: Mail },
+  { label: 'Freight and distribution deliveries', Icon: Truck },
 ];
 
 export default function Services() {
@@ -32,18 +41,46 @@ export default function Services() {
 
       <section id="same-day" className="section">
         <div className="container">
-          <div className="services-block">
-            <div className="services-block-icon">
-              <Clock size={40} strokeWidth={1.75} aria-hidden />
-            </div>
-            <div className="services-block-content">
+          <div className="services-block services-block-with-img">
+            <div className="services-block-main">
+              <div className="services-block-icon">
+                <Clock size={40} strokeWidth={1.75} aria-hidden />
+              </div>
+              <div className="services-block-content">
               <h2>Same-Day On-Demand Delivery</h2>
-              <p className="services-intro">Multiple service levels to suit any urgency.</p>
-              <ul className="services-option-list">
-                {sameDayOptions.map((opt) => (
-                  <li key={opt}>{opt}</li>
-                ))}
-              </ul>
+              <p className="services-lead">
+                When time is critical, BioCare Express provides fast and dependable same-day courier services. Our on-demand delivery solutions ensure that your package is picked up and delivered quickly, safely, and with the highest level of professionalism.
+              </p>
+              <p className="services-intro">Your delivery is made exactly when you need it with the following service options:</p>
+
+              <div className="service-option-card">
+                <h3><Truck size={22} strokeWidth={1.75} aria-hidden /> Direct Service</h3>
+                <p>
+                  From the moment you place your order online or by phone, we immediately dispatch the driver best suited to meet your urgent delivery needs. Your package goes directly from pickup to its destination without unnecessary stops.
+                </p>
+              </div>
+
+              <div className="service-option-card">
+                <h3><Timer size={22} strokeWidth={1.75} aria-hidden /> Priority Time Options</h3>
+                <p>Choose the delivery timeframe that best fits your schedule:</p>
+                <ul className="services-option-list">
+                  {priorityTimeOptions.map((opt) => (
+                    <li key={opt}>{opt}</li>
+                  ))}
+                </ul>
+                <p className="service-option-note">These flexible service levels allow you to select the speed that matches the urgency of your shipment.</p>
+              </div>
+
+              <div className="service-option-card">
+                <h3><Package size={22} strokeWidth={1.75} aria-hidden /> Same-Day Delivery</h3>
+                <p>
+                  Need delivery before the end of the day? Call us before 11:00 AM, and we will ensure your package is delivered by 5:00 PM the same day.
+                </p>
+              </div>
+              </div>
+            </div>
+            <div className="services-block-img-wrap">
+              <img src="/CourierMAn.jpg" alt="BioCare Express courier" className="services-block-img" />
             </div>
           </div>
         </div>
@@ -95,7 +132,18 @@ export default function Services() {
 
       <section className="section section-alt">
         <div className="container">
-          <p className="services-carry">We deliver documents, medical supplies, office supplies, parts, mortgage documents, bank deposits, mail, and more.</p>
+          <h2 className="section-title">Types of Deliveries We Handle</h2>
+          <p className="services-carry">
+            BioCare Express transports a wide range of important items for businesses and organizations. Our trained and experienced team understands the importance of each shipment and ensures every item is handled with professionalism, care, and attention to detail.
+          </p>
+          <ul className="deliver-types-list">
+            {deliverTypes.map(({ label, Icon }) => (
+              <li key={label}>
+                <Icon size={22} strokeWidth={1.75} className="deliver-types-icon" aria-hidden />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

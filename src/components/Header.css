@@ -91,7 +91,7 @@
 .nav-list a:hover,
 .nav-list a.active {
   color: var(--color-primary);
-  background: rgba(13, 92, 99, 0.08);
+  background: rgba(29, 78, 216, 0.08);
   text-decoration: none;
 }
 

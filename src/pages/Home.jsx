@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Clock, CalendarCheck, HeartPulse, ShieldCheck, Briefcase, Handshake, Heart, Zap, Users, ArrowRight, FileText, Package } from 'lucide-react';
+import { Clock, CalendarCheck, HeartPulse, ShieldCheck, Briefcase, Handshake, Heart, Zap, Users, ArrowRight, FileText, Package, Mail, Truck } from 'lucide-react';
 import './Home.css';
 
 const services = [
@@ -33,14 +33,14 @@ const values = [
 ];
 
 const deliverItems = [
-  { label: 'Important documents', Icon: FileText },
-  { label: 'Medical supplies & equipment', Icon: HeartPulse },
+  { label: 'Legal and business documents', Icon: FileText },
+  { label: 'Medical supplies and equipment', Icon: HeartPulse },
+  { label: 'Parts and operational materials', Icon: Package },
   { label: 'Office supplies', Icon: Package },
-  { label: 'Parts', Icon: Package },
-  { label: 'Mortgage documents', Icon: FileText },
   { label: 'Bank deposits', Icon: FileText },
-  { label: 'Mail', Icon: FileText },
-  { label: 'And more', Icon: Package },
+  { label: 'Mortgage and financial documents', Icon: FileText },
+  { label: 'Mail and confidential packages', Icon: Mail },
+  { label: 'Freight and distribution deliveries', Icon: Truck },
 ];
 
 export default function Home() {
@@ -51,7 +51,10 @@ export default function Home() {
         <div className="hero-content container">
           <h1 className="hero-title">Moving What Matters—Safely, Quickly, and Reliably.</h1>
           <p className="hero-subtitle">
-            Minnesota-based courier offering same-day, scheduled, and distribution delivery for businesses and healthcare.
+            When businesses need critical deliveries handled with precision and care, they turn to BioCare Express. We specialize in dependable courier solutions designed to keep operations running smoothly, whether it's urgent documents, medical supplies, business materials, or scheduled distribution deliveries.
+          </p>
+          <p className="hero-subtitle hero-subtitle-2">
+            Our experienced team works around the clock to ensure every delivery is handled with professionalism, efficiency, and attention to detail. From on-demand courier services to organized delivery routes, BioCare Express provides the reliability organizations need in today's fast-moving world.
           </p>
           <div className="hero-cta">
             <Link to="/contact" className="btn btn-primary btn-lg">Request Delivery</Link>
@@ -101,7 +104,9 @@ export default function Home() {
       <section className="section section-alt">
         <div className="container">
           <h2 className="section-title">What We Deliver</h2>
-          <p className="deliver-intro">Documents, medical supplies, office supplies, parts, mortgage documents, bank deposits, mail, and other critical items.</p>
+          <p className="deliver-intro">
+            BioCare Express transports a wide range of important items for businesses and organizations. Our trained and experienced team understands the importance of each shipment and ensures every item is handled with professionalism, care, and attention to detail.
+          </p>
           <ul className="deliver-list">
             {deliverItems.map(({ label, Icon }) => (
               <li key={label}>

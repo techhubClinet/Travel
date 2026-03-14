@@ -29,10 +29,7 @@ export default function MedicalDelivery() {
       <section className="section">
         <div className="container medical-content">
           <div className="medical-visual">
-            <div className="medical-placeholder" aria-hidden>
-              <HeartPulse size={64} strokeWidth={1.25} className="medical-placeholder-icon" aria-hidden />
-              <span>Medical Delivery</span>
-            </div>
+            <img src="/Medicle%20corior.webp" alt="Medical courier delivery" className="medical-intro-img" />
           </div>
           <div className="medical-copy">
             <h2>What We Deliver</h2>

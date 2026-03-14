@@ -11,22 +11,12 @@
   align-items: start;
 }
 
-.medical-placeholder {
-  aspect-ratio: 4/3;
-  background: linear-gradient(135deg, #e8f5f5 0%, var(--color-border) 100%);
+.medical-intro-img {
+  width: 100%;
+  height: auto;
   border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 1.125rem;
-}
-
-.medical-placeholder-icon {
-  opacity: 0.8;
+  object-fit: cover;
+  box-shadow: var(--shadow-lg);
 }
 
 .medical-copy h2 {
@@ -85,7 +75,7 @@
   width: 52px;
   height: 52px;
   margin-bottom: 1rem;
-  background: rgba(13, 92, 99, 0.08);
+  background: rgba(29, 78, 216, 0.08);
   color: var(--color-primary);
   border-radius: var(--radius);
 }
@@ -137,7 +127,8 @@
     order: -1;
   }
 
-  .medical-placeholder {
-    aspect-ratio: 16/10;
+  .medical-intro-img {
+    max-height: 280px;
+    object-position: center;
   }
 }
