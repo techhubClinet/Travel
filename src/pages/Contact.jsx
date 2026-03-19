@@ -1,27 +1,60 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Send, MapPin } from 'lucide-react';
+import { Phone, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import './Contact.css';
 
+const API_ENDPOINT =
+  import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
+
+const initialFormData = {
+  name: '',
+  email: '',
+  company: '',
+  serviceType: 'general',
+  message: '',
+};
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    serviceType: 'general',
-    message: '',
-  });
+  const [formData, setFormData] = useState(initialFormData);
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (status !== 'idle') setStatus('idle');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    alert('Thank you for your message. We will respond within one business day.');
-    setFormData({ name: '', email: '', company: '', serviceType: 'general', message: '' });
+    setStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          serviceType: formData.serviceType,
+          message: formData.message,
+          _subject: `BioCare Express Contact: ${formData.serviceType}`,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Submission failed (${res.status})`);
+      }
+
+      setStatus('success');
+      setFormData(initialFormData);
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(err.message || 'Something went wrong. Please try again or call 612-205-1459.');
+    }
   };
 
   return (
@@ -43,10 +76,21 @@ export default function Contact() {
               <a href="tel:612-205-1459" className="contact-phone-link">612-205-1459</a>
             </div>
             <p className="contact-note">We'll respond within one business day.</p>
-            <Link to="/contact" className="btn btn-primary btn-lg">Request Delivery</Link>
           </div>
           <div className="contact-form-wrap">
             <h2>Send a message</h2>
+            {status === 'success' && (
+              <div className="form-message form-message-success" role="alert">
+                <CheckCircle size={24} aria-hidden />
+                <p>Thank you for your message. We will respond within one business day.</p>
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="form-message form-message-error" role="alert">
+                <AlertCircle size={24} aria-hidden />
+                <p>{errorMessage}</p>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
                 <label htmlFor="name">Name *</label>
@@ -57,6 +101,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={status === 'submitting'}
                 />
               </div>
               <div className="form-group">
@@ -68,6 +113,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={status === 'submitting'}
                 />
               </div>
               <div className="form-group">
@@ -78,6 +124,7 @@ export default function Contact() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
+                  disabled={status === 'submitting'}
                 />
               </div>
               <div className="form-group">
@@ -87,6 +134,7 @@ export default function Contact() {
                   name="serviceType"
                   value={formData.serviceType}
                   onChange={handleChange}
+                  disabled={status === 'submitting'}
                 >
                   <option value="general">General inquiry</option>
                   <option value="same-day">Same-day delivery</option>
@@ -103,11 +151,22 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={status === 'submitting'}
                 />
               </div>
-              <button type="submit" className="btn btn-primary btn-lg">
-                <Send size={20} strokeWidth={2} aria-hidden />
-                Submit
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg"
+                disabled={status === 'submitting'}
+              >
+                {status === 'submitting' ? (
+                  <>Sending…</>
+                ) : (
+                  <>
+                    <Send size={20} strokeWidth={2} aria-hidden />
+                    Submit
+                  </>
+                )}
               </button>
             </form>
           </div>

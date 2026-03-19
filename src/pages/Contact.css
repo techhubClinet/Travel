@@ -50,6 +50,45 @@
   margin: 0 0 2rem;
 }
 
+.form-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+}
+
+.form-message p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.form-message svg {
+  flex-shrink: 0;
+}
+
+.form-message-success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.form-message-success svg {
+  color: #059669;
+}
+
+.form-message-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.form-message-error svg {
+  color: #dc2626;
+}
+
 .contact-form .form-group {
   margin-bottom: 1.5rem;
 }

@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section section-alt reveal-services-section">
         <div className="container">
           <h2 className="section-title">Our Services</h2>
           <p className="section-intro">Professional delivery options for every need—urgent same-day runs or recurring scheduled routes.</p>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section reveal-why-choose-section">
         <div className="container">
           <h2 className="section-title">Why Choose BioCare Express</h2>
           <p className="section-intro">Trusted by businesses and healthcare providers across Minnesota.</p>
@@ -101,7 +101,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section section-alt reveal-deliver-section">
         <div className="container">
           <h2 className="section-title">What We Deliver</h2>
           <p className="deliver-intro">
