@@ -30,6 +30,8 @@
 
 html {
   scroll-behavior: auto;
+  /* Keep layout stable across devices with transforms (e.g. mobile nav). */
+  overflow-x: hidden;
 }
 
 body {
@@ -40,6 +42,8 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  /* Prevent mobile/X-axis "side scroll" from transformed fixed elements. */
+  overflow-x: hidden;
 }
 
 #root {
@@ -232,6 +236,7 @@ label {
   width: 100%;
   /* Default to native scrolling; JS enables "is-smooth" only when Locomotive is active. */
   height: auto;
+  overflow-x: hidden;
   overflow: visible;
   min-height: 1px;
 }
@@ -239,6 +244,7 @@ label {
 .smooth-wrapper.is-smooth {
   height: 100vh;
   overflow: hidden;
+  overflow-x: hidden;
   min-height: 100vh;
 }
 
@@ -265,5 +271,6 @@ label {
     overflow: visible;
     height: auto;
     min-height: 1px;
+    overflow-x: hidden;
   }
 }
