@@ -154,6 +154,10 @@ p {
   .section {
     padding: var(--section-padding-sm) 0;
   }
+
+  .container {
+    padding: 0 1rem;
+  }
 }
 
 .section-alt {

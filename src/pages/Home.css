@@ -239,6 +239,7 @@
   }
 
   .values-grid {
-    grid-template-columns: 1fr 1fr;
+    /* Two columns were too tight on small phones and could overflow/crop. */
+    grid-template-columns: 1fr;
   }
 }
