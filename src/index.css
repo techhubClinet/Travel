@@ -230,6 +230,13 @@ label {
 .smooth-wrapper {
   position: relative;
   width: 100%;
+  /* Default to native scrolling; JS enables "is-smooth" only when Locomotive is active. */
+  height: auto;
+  overflow: visible;
+  min-height: 1px;
+}
+
+.smooth-wrapper.is-smooth {
   height: 100vh;
   overflow: hidden;
   min-height: 100vh;
@@ -250,4 +257,13 @@ label {
 .smooth-wrapper.is-reduced-motion {
   overflow: visible;
   height: auto;
+}
+
+/* Extra safety: allow native scrolling on common "mobile" breakpoints. */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .smooth-wrapper.is-smooth {
+    overflow: visible;
+    height: auto;
+    min-height: 1px;
+  }
 }

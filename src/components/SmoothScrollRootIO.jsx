@@ -153,19 +153,31 @@ export default function SmoothScrollRootIO({ children }) {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     container.classList.toggle('is-reduced-motion', prefersReducedMotion);
+    container.classList.remove('is-smooth');
+
+    // Locomotive can interfere with native scrolling on mobile. Use native scroll there.
+    const isMobile =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const shouldUseLoco = !prefersReducedMotion && !isMobile;
+    container.classList.toggle('is-smooth', shouldUseLoco);
 
     let loco = null;
     let observer = null;
 
     const init = () => {
       const targets = getTargets(container);
-      if (!targets.length) return;
+      if (!targets.length) {
+        // Nothing to animate; keep native scroll working.
+        container.classList.remove('is-smooth');
+        return;
+      }
 
       // Baseline hidden state; each section timeline reveals with richer motion.
       gsap.set(targets, { opacity: 0, y: prefersReducedMotion ? 16 : 28, filter: 'blur(4px)' });
 
       // Locomotive smooth scroll (optional).
-      if (!prefersReducedMotion) {
+      if (shouldUseLoco) {
         try {
           const content = container.querySelector('[data-scroll-section]') || container;
           loco = new LocomotiveScroll({
@@ -180,7 +192,7 @@ export default function SmoothScrollRootIO({ children }) {
         } catch (e) {
           console.error('SmoothScrollRootIO: Locomotive init failed', e);
           loco = null;
-          container.classList.add('is-reduced-motion');
+          container.classList.remove('is-smooth');
         }
       }
 
