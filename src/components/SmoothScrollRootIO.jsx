@@ -39,6 +39,7 @@ const REVEAL_SELECTORS = [
   '.footer-links',
   '.footer-services',
   '.footer-contact',
+  '.brand-photo',
 ].join(',');
 
 function getTargets(container) {
@@ -49,6 +50,20 @@ function getTargets(container) {
 
 function animateSection(root, targets, { isFeatureSection, initialDelay, prefersReducedMotion }) {
   if (!targets.length) return;
+
+  // Footer: no blur, 3D, or looping motion—keeps links and text crisp.
+  if (root.classList.contains('site-footer')) {
+    gsap.to(targets, {
+      opacity: 1,
+      y: 0,
+      filter: 'none',
+      duration: prefersReducedMotion ? 0.45 : 0.55,
+      stagger: 0.04,
+      ease: 'power2.out',
+      delay: initialDelay,
+    });
+    return;
+  }
 
   const heading = targets.find((el) => el.matches('.section-title, .page-hero h1, .hero-title'));
   const intro = targets.find((el) => el.matches('.section-intro, .page-hero-sub, .hero-subtitle, .deliver-intro, .cta-strip-text'));
@@ -174,7 +189,11 @@ export default function SmoothScrollRootIO({ children }) {
       }
 
       // Baseline hidden state; each section timeline reveals with richer motion.
-      gsap.set(targets, { opacity: 0, y: prefersReducedMotion ? 16 : 28, filter: 'blur(4px)' });
+      const inFooter = (el) => el.closest('.site-footer');
+      const footerTargets = targets.filter(inFooter);
+      const pageTargets = targets.filter((el) => !inFooter(el));
+      gsap.set(pageTargets, { opacity: 0, y: prefersReducedMotion ? 16 : 28, filter: 'blur(4px)' });
+      gsap.set(footerTargets, { opacity: 0, y: prefersReducedMotion ? 10 : 14 });
 
       // Locomotive smooth scroll (optional).
       if (shouldUseLoco) {
@@ -229,6 +248,7 @@ export default function SmoothScrollRootIO({ children }) {
               const isFeatureSection =
                 root.classList.contains('reveal-services-section') ||
                 root.classList.contains('reveal-why-choose-section') ||
+                root.classList.contains('reveal-brand-section') ||
                 root.classList.contains('reveal-deliver-section') ||
                 root.classList.contains('reveal-footer-section');
               animateSection(root, els, {
@@ -261,6 +281,7 @@ export default function SmoothScrollRootIO({ children }) {
           const isFeatureSection =
             root.classList.contains('reveal-services-section') ||
             root.classList.contains('reveal-why-choose-section') ||
+            root.classList.contains('reveal-brand-section') ||
             root.classList.contains('reveal-deliver-section') ||
             root.classList.contains('reveal-footer-section');
           animateSection(root, els, {

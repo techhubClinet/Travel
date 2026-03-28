@@ -101,6 +101,26 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section reveal-brand-section" aria-labelledby="brand-heading">
+        <div className="container">
+          <h2 id="brand-heading" className="section-title">Our Brand in Action</h2>
+          <p className="section-intro">
+            BioCare Express couriers wear our colors with pride—so clients and partners know who they are working with from the first handshake to the last delivery.
+          </p>
+          <div className="brand-gallery">
+            <figure className="brand-photo">
+              <img src="/s1.png" alt="BioCare Express team member wearing navy branded polo shirt with logo" loading="lazy" width={600} height={800} />
+            </figure>
+            <figure className="brand-photo">
+              <img src="/s2.png" alt="BioCare Express courier in navy branded polo and professional attire" loading="lazy" width={600} height={800} />
+            </figure>
+            <figure className="brand-photo">
+              <img src="/s3.png" alt="BioCare Express representative in navy branded long-sleeve apparel" loading="lazy" width={600} height={800} />
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <section className="section section-alt reveal-deliver-section">
         <div className="container">
           <h2 className="section-title">What We Deliver</h2>
