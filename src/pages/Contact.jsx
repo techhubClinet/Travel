@@ -4,7 +4,7 @@ import { Phone, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import './Contact.css';
 
 const API_ENDPOINT =
-  import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
+  'https://travel-backend-5c8apu4a2-aryans-projects-02adfc1b.vercel.app/api/contact';
 
 const initialFormData = {
   name: '',
