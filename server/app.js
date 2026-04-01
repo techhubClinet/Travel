@@ -20,8 +20,9 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true });
 });
 
-// In production, serve the React build so one server handles both API and frontend
-if (config.nodeEnv === 'production') {
+// In monorepo production, optionally serve the React build.
+// Disable this on Vercel/serverless API deployment.
+if (config.nodeEnv === 'production' && !process.env.VERCEL) {
   const distPath = path.resolve(__dirname, '..', 'dist');
   app.use(express.static(distPath));
   app.get('*', (_req, res) => {

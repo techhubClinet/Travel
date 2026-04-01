@@ -1,11 +1,24 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Load .env from project root (one level up from server/)
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+// Support both layouts:
+// 1) monorepo: ../.env (current project structure)
+// 2) server-only repo: ./.env (Vercel/deployed server repo)
+const envCandidates = [
+  path.resolve(__dirname, '..', '.env'),
+  path.resolve(__dirname, '.env'),
+];
+
+for (const envPath of envCandidates) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+    break;
+  }
+}
 
 const required = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'];
 const missing = required.filter((key) => !process.env[key]?.trim());
